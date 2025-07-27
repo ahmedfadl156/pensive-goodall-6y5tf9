@@ -1,0 +1,253 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  padding: 40px 20px;
+  color: #333;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.header h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 15px;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  letter-spacing: -0.02em;
+}
+
+.header .subtitle {
+  font-size: 1.3rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 300;
+  margin-bottom: 30px;
+}
+
+.header .divider {
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+  margin: 0 auto;
+  border-radius: 2px;
+  box-shadow: 0 2px 10px rgba(255, 107, 107, 0.3);
+}
+
+.flashcards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+  perspective: 1000px;
+}
+
+.flashcard {
+  position: relative;
+  height: 220px;
+  cursor: pointer;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  transform-style: preserve-3d;
+}
+
+.flashcard:hover {
+  transform: translateY(-8px) rotateX(5deg);
+}
+
+.flashcard.flipped {
+  transform: rotateY(180deg);
+}
+
+.flashcard.flipped:hover {
+  transform: rotateY(180deg) translateY(-8px);
+}
+
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.card-front {
+  background: linear-gradient(145deg, #ffffff, #f8f9ff);
+  border: 2px solid rgba(102, 126, 234, 0.1);
+  color: #2d3748;
+}
+
+.card-front:hover {
+  box-shadow: 0 20px 40px rgba(102, 126, 234, 0.15);
+  border-color: rgba(102, 126, 234, 0.3);
+}
+
+.card-back {
+  background: linear-gradient(145deg, #667eea, #764ba2);
+  color: white;
+  transform: rotateY(180deg);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.card-back:hover {
+  box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+}
+
+.question-text {
+  font-size: 1.1rem;
+  font-weight: 500;
+  line-height: 1.6;
+  position: relative;
+}
+
+.answer-text {
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.answer-text:before {
+  content: "✓";
+  position: absolute;
+  top: -25px;
+  right: -15px;
+  width: 30px;
+  height: 30px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+  backdrop-filter: blur(10px);
+}
+
+.card-front:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(145deg, transparent, rgba(102, 126, 234, 0.03));
+  border-radius: 18px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card-front:hover:before {
+  opacity: 1;
+}
+
+.card-back:after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  pointer-events: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header h1 {
+    font-size: 2.5rem;
+  }
+
+  .header .subtitle {
+    font-size: 1.1rem;
+  }
+
+  .flashcards {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .flashcard {
+    height: 180px;
+  }
+
+  .card-face {
+    padding: 25px;
+  }
+
+  .question-text {
+    font-size: 1rem;
+  }
+
+  .answer-text {
+    font-size: 1.2rem;
+  }
+}
+
+/* Loading Animation */
+.flashcard {
+  animation: slideUp 0.6s ease-out backwards;
+}
+
+.flashcard:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.flashcard:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.flashcard:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.flashcard:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.flashcard:nth-child(5) {
+  animation-delay: 0.5s;
+}
+.flashcard:nth-child(6) {
+  animation-delay: 0.6s;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover effects for better interactivity */
+.flashcard:active {
+  transform: scale(0.98);
+}
+
+.card-front {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-back {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
